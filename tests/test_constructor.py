@@ -1,31 +1,29 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium import webdriver
+from locators import Constructor
+import urls
 
-driver = webdriver.Chrome()
-driver.maximize_window()
-driver.get('https://stellarburgers.education-services.ru')
+class TestConstructor:
+    def test_sauses(self, driver: webdriver.Chrome):
+        driver.get(urls.BASE_URL)
+        sauses = driver.find_element(*Constructor.sauses_tab)
+        sauses.click()
+        active = WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((Constructor.active_tab)))
+        assert 'Соусы' in active.text, "Таб 'Соусы' не активирован"
 
-try:
-    sauses = driver.find_element(By.XPATH, ".//span[text()='Соусы']")
-    sauses.click()
-    sauses_section = WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located((By.XPATH, ".//h2[text()='Соусы']")))
-    driver.execute_script("arguments[0].scrollIntoView();", sauses_section) 
-    print('PASSED')
+    def test_fillings(self, driver: webdriver.Chrome):
+        driver.get(urls.BASE_URL)
+        fillings = driver.find_element(*Constructor.fillings_tab)
+        fillings.click()
+        active = WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((Constructor.active_tab)))
+        assert 'Начинки' in active.text, "Таб 'Начинки' не активирован"
 
-    fillings = driver.find_element(By.XPATH, ".//span[text()='Начинки']")
-    fillings.click()
-    fillings_section = WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located((By.XPATH,".//h2[text()='Начинки']")))
-    driver.execute_script("arguments[0].scrollIntoView();", fillings_section) 
-    print('PASSED')
-
-    buns = driver.find_element(By.XPATH, ".//span[text()='Булки']")
-    buns.click()
-    buns_section = WebDriverWait(driver, 3).until(expected_conditions.visibility_of_element_located((By.XPATH,".//h2[text()='Булки']")))
-    driver.execute_script("arguments[0].scrollIntoView();", buns_section) 
-    print('PASSED')
-except:
-    print('FAILED')
-
-driver.quit()
+    def test_buns(self, driver: webdriver.Chrome):
+        driver.get(urls.BASE_URL)
+        sauses = driver.find_element(*Constructor.sauses_tab)
+        sauses.click()
+        buns = driver.find_element(*Constructor.buns_tab)
+        buns.click()
+        active = WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((Constructor.active_tab)))
+        assert 'Булки' in active.text, "Таб 'Булки' не активирован"

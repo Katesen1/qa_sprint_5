@@ -1,0 +1,6 @@
+BASE_URL = 'https://stellarburgers.education-services.ru/'
+REGISTER_PATH = 'register'
+LOGIN_PATH = 'login'
+FORGOT_PASSWORD_PATH = 'forgot-password'
+ACCOUNT_PATH = 'account'
+ACCOUNT_PROFILE_PATH = 'account/profile'
