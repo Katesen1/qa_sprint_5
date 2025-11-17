@@ -4,7 +4,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from locators import Login
 from locators import Account
 import urls
-import time
 
 class TestPersonalAccount:
     def test_go_to_personal_account_autorized(self, driver: webdriver.Chrome, login):
